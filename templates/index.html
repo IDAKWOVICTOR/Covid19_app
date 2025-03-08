@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COVID-19 Symptom Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='images/eHA-logo-blue_320x132.png') }}" alt="Logo" class="logo">
+        </div>
+        <h1>COVID-19 Symptom Prediction</h1>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="form-container">
+                <h2>Select Symptoms</h2>
+                <form id="symptomForm">
+                    <div class="symptom">
+                        <label for="Chest pain">Chest pain:</label>
+                        <button type="button" onclick="setSymptom('Chest pain', true)" class="symptom-btn">Yes</button>
+                        <button type="button" onclick="setSymptom('Chest pain', false)" class="symptom-btn">No</button>
+                    </div>
+                    <div class="symptom">
+                        <label for="Chills or sweats">Chills or sweats:</label>
+                        <button type="button" onclick="setSymptom('Chills or sweats', true)" class="symptom-btn">Yes</button>
+                        <button type="button" onclick="setSymptom('Chills or sweats', false)" class="symptom-btn">No</button>
+                    </div>
+                    <div class="symptom">
+                        <label for="Confused or disoriented">Confused or disoriented:</label>
+                        <button type="button" onclick="setSymptom('Confused or disoriented', true)" class="symptom-btn">Yes</button>
+                        <button type="button" onclick="setSymptom('Confused or disoriented', false)" class="symptom-btn">No</button>
+                    </div>
+                    <div class="symptom">
+                        <label for="Cough">Cough:</label>
+                        <button type="button" onclick="setSymptom('Cough', true)" class="symptom-btn">Yes</button>
+                        <button type="button" onclick="setSymptom('Cough', false)" class="symptom-btn">No</button>
+                    </div>
+                    <div class="symptom">
+                        <label for="Diarrhea">Diarrhea:</label>
+                        <button type="button" onclick="setSymptom('Diarrhea', true)" class="symptom-btn">Yes</button>
+                        <button type="button" onclick="setSymptom('Diarrhea', false)" class="symptom-btn">No</button>
+                    </div>
+                    <div class="symptom">
+                        <label for="Difficulty breathing or Dyspnea">Difficulty breathing or Dyspnea:</label>
+                        <button type="button" onclick="setSymptom('Difficulty breathing or Dyspnea', true)" class="symptom-btn">Yes</button>
+                        <button type="button" onclick="setSymptom('Difficulty breathing or Dyspnea', false)" class="symptom-btn">No</button>
+                    </div>
+                    <div class="symptom">
+                        <label for="Cough with sputum">Cough with sputum:</label>
+                        <button type="button" onclick="setSymptom('Cough with sputum', true)" class="symptom-btn">Yes</button>
+                        <button type="button" onclick="setSymptom('Cough with sputum', false)" class="symptom-btn">No</button>
+                    </div>
+                    <div class="symptom">
+                        <label for="Cough with heamoptysis">Cough with heamoptysis:</label>
+                        <button type="button" onclick="setSymptom('Cough with heamoptysis', true)" class="symptom-btn">Yes</button>
+                        <button type="button" onclick="setSymptom('Cough with heamoptysis', false)" class="symptom-btn">No</button>
+                    </div>
+                    <div class="symptom">
+                        <label for="Wheezing">Wheezing:</label>
+                        <button type="button" onclick="setSymptom('Wheezing', true)" class="symptom-btn">Yes</button>
+                        <button type="button" onclick="setSymptom('Wheezing', false)" class="symptom-btn">No</button>
+                    </div>
+                </form>
+                <button onclick="submitPrediction()" class="submit-btn">Submit Prediction</button>
+            </div>
+
+            <div id="results" class="results"></div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 COVID-19 Symptom Prediction System | All Rights Reserved</p>
+    </footer>
+
+    <script>
+        const symptoms = {
+            "Chest pain": 0,
+            "Chills or sweats": 0,
+            "Confused or disoriented": 0,
+            "Cough": 0,
+            "Diarrhea": 0,
+            "Difficulty breathing or Dyspnea": 0,
+            "Cough with sputum": 0,
+            "Cough with heamoptysis": 0,
+            "Wheezing": 0
+        };
+
+        function setSymptom(symptom, value) {
+            symptoms[symptom] = value ? 1 : 0;
+
+            // Highlight the selected button
+            const buttons = document.querySelectorAll(`[onclick="setSymptom('${symptom}', true)"], [onclick="setSymptom('${symptom}', false)"]`);
+            buttons.forEach(button => button.classList.remove('active'));
+            if (value) {
+                buttons[0].classList.add('active');
+            } else {
+                buttons[1].classList.add('active');
+            }
+        }
+
+        async function submitPrediction() {
+            try {
+                const response = await fetch('http://127.0.0.1:5000/predict', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(symptoms)
+                });
+
+                const result = await response.json();
+                const predictionText = result.prediction === "Positive" ? "Likely COVID-19 Positive" : "Likely COVID-19 Negative";
+
+                document.getElementById('results').innerHTML = `
+                    <p>Prediction: <strong>${predictionText}</strong></p>
+                `;
+            } catch (error) {
+                console.error("Error making prediction:", error);
+                document.getElementById('results').textContent = "Error making prediction. Please try again.";
+            }
+        }
+    </script>
+</body>
+
+</html>
