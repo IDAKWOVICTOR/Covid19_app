@@ -1,7 +1,7 @@
 # COVID-19 Case Prediction and Modelling
 
 ## Overview
-This repository contains a machine learning pipeline for predicting COVID-19 cases based on clinical symptoms. The project involves data preprocessing, feature engineering, model selection, evaluation, and deployment.
+This repository contains a machine learning pipeline for predicting COVID-19 cases based on clinical symptoms. The project involves data preprocessing, feature engineering, model selection, evaluation, and deployment. A web application was created using **Streamlit** and is hosted at [COVID-19 Prediction App](https://covid19test.streamlit.app/).
 
 ## Table of Contents
 - [Installation](#installation)
@@ -12,13 +12,14 @@ This repository contains a machine learning pipeline for predicting COVID-19 cas
 - [Model Evaluation](#model-evaluation)
 - [Model Deployment](#model-deployment)
 - [Results](#results)
+- [Web Application](#web-application)
 - [Contributing](#contributing)
 - [License](#license)
 
 ## Installation
 To run this project, install the required dependencies:
 ```bash
-pip install lazypredict shap scikit_learn pandas geopandas matplotlib openpyxl statsmodels
+pip install lazypredict shap scikit_learn pandas geopandas matplotlib openpyxl statsmodels streamlit joblib
 ```
 
 ## Data Collection
@@ -66,6 +67,14 @@ The best model can be deployed using **Flask** or **Streamlit**:
 - Identified the best-performing model based on **F1 Score**.
 - Logistic Regression **ANOVA-like** analysis was conducted.
 
+## Web Application
+A **Streamlit** web application was developed to allow users to predict COVID-19 cases based on symptoms. The application:
+- Lets users input symptoms via a user-friendly interface.
+- Uses a trained **Random Forest model** to predict whether the case is **Positive** or **Negative**.
+- Displays the prediction result in real-time.
+
+You can access the web application here: [COVID-19 Prediction App](https://covid19test.streamlit.app/).
+
 ## Contributing
 Contributions are welcome! Please follow these steps:
 1. Fork the repository.
@@ -75,4 +84,3 @@ Contributions are welcome! Please follow these steps:
 
 ## License
 This project is licensed under the MIT License. See `LICENSE` for details.
-
