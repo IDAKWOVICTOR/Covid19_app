@@ -1,0 +1,146 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+    background-color: #f4f7fc;
+    color: #333;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo-container img {
+    max-width: 150px;
+    margin-bottom: 10px;
+}
+
+h1 {
+    font-size: 2.5em;
+    color: #333;
+}
+
+h2 {
+    margin-top: 20px;
+    font-size: 1.8em;
+    color: #4CAF50;
+}
+
+/* Main Container */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Form Styling */
+.form-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 20px;
+}
+
+/* Symptoms Section */
+.symptom {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+label {
+    font-size: 1.2em;
+    width: 50%;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Button Styling */
+button {
+    padding: 10px 18px;
+    font-size: 1.1em;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    background-color: #ddd;
+    width: 100px;
+    text-align: center;
+}
+
+button:hover {
+    background-color: #ccc;
+}
+
+button.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Submit Button */
+.submit-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    font-size: 1.2em;
+    border-radius: 6px;
+    width: 100%;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #45a049;
+}
+
+/* Results Section */
+.results {
+    text-align: center;
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 1em;
+    color: #777;
+}
+
+footer p {
+    margin: 5px 0;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 600px) {
+    label {
+        width: 100%;
+        text-align: left;
+        margin-bottom: 5px;
+    }
+    
+    .symptom {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    button {
+        width: 100%;
+    }
+}
